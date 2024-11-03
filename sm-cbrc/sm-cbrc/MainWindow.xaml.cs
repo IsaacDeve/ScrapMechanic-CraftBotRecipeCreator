@@ -67,19 +67,51 @@ namespace sm_cbrc
             {
                 dialog.InitialDirectory = "C:\\";
             }
-            dialog.Title = "Choose a file";
+            dialog.Title = "Choose a recipe (json)";
 
             dialog.ShowDialog();
             recipepath.Text = dialog.FileName;
         }
-
+        
         private void recipepath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           UpdateRecipes();
+        }
+
+        public void UpdateRecipes()
         {
             try
             {
+                
+                
                 recipecontentjson.Text = File.ReadAllText(recipepath.Text);
             }
             catch { }
+        }
+        private List<Item> LoadRecipes(string filePath)
+        {
+            try
+            {
+                var jsonString = File.ReadAllText(filePath);
+
+                var items = JsonSerializer.Deserialize<List<Item>>(jsonString);
+                return items;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show($"Ошибка при чтении файла: {ex.Message}");
+                return null;
+            }
+        }
+
+        private void AddNewRecipe()
+        {
+
+        }
+
+        private void recipeAddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

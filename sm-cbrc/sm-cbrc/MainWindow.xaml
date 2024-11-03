@@ -9,8 +9,7 @@
     <Grid Background="#2e3242">
         <!-- Меню -->
         <Menu VerticalAlignment="Top" Background="#2e3242" Foreground="White">
-            <MenuItem Header="Recipes" Foreground="LightGray" Click="MenuItem_Click">
-                <MenuItem Click="NewRecipe_Click" Header="New" Foreground="LightGray" Background="#2e3242" BorderBrush="#2e3242" BorderThickness="0"/>
+            <MenuItem Header="Recipe" Foreground="LightGray" Click="MenuItem_Click">
                 <MenuItem Click="OpenRecipe_Click" Header="Open" Foreground="LightGray" Background="#2e3242" BorderBrush="#2e3242" BorderThickness="0"/>
             </MenuItem>
         </Menu>
@@ -27,7 +26,22 @@
 
             <!-- Левая область с границей -->
             <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="1" Margin="5" Background="#3a3f54">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
+                    <!-- Верхняя часть -->
+
+                    <!-- Разделитель -->
+                    <GridSplitter Grid.Row="1" Height="5" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+
+
+                    <!-- Нижняя часть -->
+                    <Button x:Name="recipeAddBtn" Foreground="LightGray" BorderBrush="Transparent" Background="#2e3242" Content="Add" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Height="50" Width="50" FontSize="12" Click="recipeAddBtn_Click"/>
+                </Grid>
             </Border>
 
             <!-- Разделитель -->
@@ -38,6 +52,10 @@
                 <TextBox x:Name="recipecontentjson" IsReadOnly="True" Foreground="White" Background="#282C39" BorderBrush="Transparent"/>
             </Border>
         </Grid>
-        <TextBox x:Name="recipepath" BorderBrush="Transparent" Text="aaa" Background="#2e3242"  Foreground="LightGray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Width="586" TextChanged="recipepath_TextChanged"/>
+
+        <!-- Текстовое поле для пути к рецепту -->
+        <TextBox x:Name="recipepath" BorderBrush="Transparent" Text="aaa" Background="#2e3242" Foreground="LightGray" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" 
+                 Margin="0,18,0,0" VerticalAlignment="Top" Width="586" TextChanged="recipepath_TextChanged"/>
     </Grid>
 </Window>
