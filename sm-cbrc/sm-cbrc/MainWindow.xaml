@@ -5,14 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sm_cbrc"
         mc:Ignorable="d"
-        Title="Recipe creator" Height="450" Width="800">
+        Title="Recipe creator" Height="615" Width="1112">
     <Grid Background="#2e3242">
+        <!-- Меню -->
         <Menu VerticalAlignment="Top" Background="#2e3242" Foreground="White">
             <MenuItem Header="Recipes" Foreground="LightGray" Click="MenuItem_Click">
                 <MenuItem Click="NewRecipe_Click" Header="New" Foreground="LightGray" Background="#2e3242" BorderBrush="#2e3242" BorderThickness="0"/>
                 <MenuItem Click="OpenRecipe_Click" Header="Open" Foreground="LightGray" Background="#2e3242" BorderBrush="#2e3242" BorderThickness="0"/>
             </MenuItem>
         </Menu>
-        <Border BorderBrush="Black" BorderThickness="1" Margin="400,-10,0,0"/>
+
+        <!-- Основная сетка с разделителем -->
+        <Grid Margin="0,41,0,0">
+            <!-- Отступ сверху для меню -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <!-- Ширина разделителя -->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Левая область с границей -->
+            <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="1" Margin="5" Background="#3a3f54">
+
+            </Border>
+
+            <!-- Разделитель -->
+            <GridSplitter Grid.Column="1" Width="5" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <!-- Правая область с границей -->
+            <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="1" Margin="5" Background="#3a3f54">
+                <TextBox x:Name="recipecontentjson" IsReadOnly="True" Foreground="White" Background="#282C39" BorderBrush="Transparent"/>
+            </Border>
+        </Grid>
+        <TextBox x:Name="recipepath" BorderBrush="Transparent" Text="aaa" Background="#2e3242"  Foreground="LightGray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Width="586" TextChanged="recipepath_TextChanged"/>
     </Grid>
 </Window>
