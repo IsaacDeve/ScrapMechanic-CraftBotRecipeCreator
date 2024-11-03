@@ -35,6 +35,12 @@
 
                     <!-- Верхняя часть -->
 
+                    <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="1" Margin="5" Background="#3a3f54">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel x:Name="recipeContainer" Margin="10"/>
+                        </ScrollViewer>
+                    </Border>
+
                     <!-- Разделитель -->
                     <GridSplitter Grid.Row="1" Height="5" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
 
@@ -49,7 +55,7 @@
 
             <!-- Правая область с границей -->
             <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="1" Margin="5" Background="#3a3f54">
-                <TextBox x:Name="recipecontentjson" IsReadOnly="True" Foreground="White" Background="#282C39" BorderBrush="Transparent"/>
+                <TextBox x:Name="recipecontentjson" IsReadOnly="True" Foreground="White" Background="#282C39" BorderBrush="Transparent" TextChanged="recipecontentjson_TextChanged"/>
             </Border>
         </Grid>
 

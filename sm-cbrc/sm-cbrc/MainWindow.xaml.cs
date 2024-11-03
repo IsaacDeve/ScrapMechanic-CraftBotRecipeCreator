@@ -31,6 +31,14 @@ namespace sm_cbrc
         public int CraftTime { get; set; }
         public List<Ingredient> IngredientList { get; set; }
     }
+    public class ItemToVisual {
+        public string ItemId { get; set; }
+        public int Quantity { get; set; }
+        public int CraftTime { get; set; }
+        public List<Ingredient> IngredientList { get; set; }
+
+    }
+
 
     public partial class MainWindow : Window
     {
@@ -71,11 +79,13 @@ namespace sm_cbrc
 
             dialog.ShowDialog();
             recipepath.Text = dialog.FileName;
+
         }
         
         private void recipepath_TextChanged(object sender, TextChangedEventArgs e)
         {
            UpdateRecipes();
+
         }
 
         public void UpdateRecipes()
@@ -85,22 +95,87 @@ namespace sm_cbrc
                 
                 
                 recipecontentjson.Text = File.ReadAllText(recipepath.Text);
+
+                
+
             }
             catch { }
         }
-        private List<Item> LoadRecipes(string filePath)
+        void LoadRecipes(string filePath)
         {
             try
             {
-                var jsonString = File.ReadAllText(filePath);
+                // Deserialize JSON file to List<Item>
+                List<Item> items;
+                using (StreamReader r = new StreamReader(filePath))
+                {
+                    string json = r.ReadToEnd();
+                    items = JsonSerializer.Deserialize<List<Item>>(json);
+                }
 
-                var items = JsonSerializer.Deserialize<List<Item>>(jsonString);
-                return items;
+                // Clear any existing children in the parent container (for example, a StackPanel)
+                recipeContainer.Children.Clear();
+
+                // Loop through each item and create input fields dynamically
+                foreach (var item in items)
+                {
+                    // Create a new StackPanel for each item
+                    StackPanel itemPanel = new StackPanel
+                    {
+                        Margin = new Thickness(10)
+                    };
+
+                    // Add ItemId field
+                    itemPanel.Children.Add(new TextBlock { Text = "Item ID:", Foreground = Brushes.LightGray });
+                    itemPanel.Children.Add(new System.Windows.Controls.TextBox
+                    {
+                        Text = item.ItemId,
+                        Width = 200,
+                        Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                        Foreground = Brushes.White,
+                        BorderBrush = Brushes.Gray
+                    });
+
+                    // Add Quantity field
+                    itemPanel.Children.Add(new TextBlock { Text = "Quantity:", Foreground = Brushes.LightGray });
+                    itemPanel.Children.Add(new System.Windows.Controls.TextBox
+                    {
+                        Text = item.Quantity.ToString(),
+                        Width = 200,
+                        Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                        Foreground = Brushes.White,
+                        BorderBrush = Brushes.Gray
+                    });
+
+                    // Add CraftTime field
+                    itemPanel.Children.Add(new TextBlock { Text = "Craft Time:", Foreground = Brushes.LightGray });
+                    itemPanel.Children.Add(new System.Windows.Controls.TextBox
+                    {
+                        Text = item.CraftTime.ToString(),
+                        Width = 200,
+                        Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                        Foreground = Brushes.White,
+                        BorderBrush = Brushes.Gray
+                    });
+
+                    // Add Ingredients field (comma-separated)
+                    itemPanel.Children.Add(new TextBlock { Text = "Ingredients (comma-separated IDs):", Foreground = Brushes.LightGray });
+                    itemPanel.Children.Add(new System.Windows.Controls.TextBox
+                    {
+                        Text = string.Join(", ", item.IngredientList.Select(ing => ing.ItemId)),
+                        Width = 200,
+                        Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                        Foreground = Brushes.White,
+                        BorderBrush = Brushes.Gray
+                    });
+
+                    // Add the StackPanel to the parent container
+                    recipeContainer.Children.Add(itemPanel);
+                }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show($"Ошибка при чтении файла: {ex.Message}");
-                return null;
+                System.Windows.MessageBox.Show($"Error reading file: {ex.Message}");
             }
         }
 
