@@ -34,12 +34,10 @@
                     </Grid.RowDefinitions>
 
                     <!-- Верхняя часть -->
+                    <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="recipeContainer" Margin="10"/>
+                    </ScrollViewer>
 
-                    <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="1" Margin="5" Background="#3a3f54">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto">
-                            <StackPanel x:Name="recipeContainer" Margin="10"/>
-                        </ScrollViewer>
-                    </Border>
 
                     <!-- Разделитель -->
                     <GridSplitter Grid.Row="1" Height="5" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
