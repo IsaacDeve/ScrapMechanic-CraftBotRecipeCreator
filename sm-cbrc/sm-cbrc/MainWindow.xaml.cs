@@ -179,6 +179,11 @@ namespace sm_cbrc
             }
         }
 
+        private void recipecontentjson_TextChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void AddNewRecipe()
         {
 
