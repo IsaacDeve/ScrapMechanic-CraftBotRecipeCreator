@@ -37,9 +37,13 @@
                     <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
                         <StackPanel x:Name="recipeContainer" Margin="10"/>
                     </ScrollViewer>
+					<Button x:Name="addItemBtn" Content="Add New Item"  Foreground="LightGray" BorderBrush="Transparent"
+                        Background="#2e3242" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" 
+                        Height="50" Width="75" FontSize="12" Click="AddItemBtn_Click" />
 
 
-                    <Button x:Name="saveBtn" Content="Save" Foreground="LightGray" BorderBrush="Transparent"
+					<Button x:Name="saveBtn" Content="Save" Foreground="LightGray" BorderBrush="Transparent"
                         Background="#2e3242" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                         HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" 
                         Height="50" Width="75" FontSize="12" Click="saveBtn_Click"/>

@@ -135,7 +135,13 @@ namespace sm_cbrc
                     {
                         Margin = new Thickness(10)
                     };
-
+                    Button removeItemBtn = new Button
+                    {
+                        Content = "Remove Item",
+                        Margin = new Thickness(0, 5, 0, 5)
+                    };
+                    removeItemBtn.Click += (s, ev) => recipeContainer.Children.Remove(itemPanel); // Remove the entire itemPanel
+                    itemPanel.Children.Add(removeItemBtn);
                     // Add ItemId field
                     itemPanel.Children.Add(new TextBlock { Text = "Item ID:", Foreground = Brushes.LightGray });
                     itemPanel.Children.Add(new TextBox
@@ -171,7 +177,13 @@ namespace sm_cbrc
 
                     // Add Ingredients header
                     itemPanel.Children.Add(new TextBlock { Text = "Ingredients:", Foreground = Brushes.LightGray, Margin = new Thickness(0, 10, 0, 5) });
-
+                    Button addIngredientBtn = new Button
+                    {
+                        Content = "Add Ingredient",
+                        Margin = new Thickness(0, 5, 0, 5)
+                    };
+                    addIngredientBtn.Click += (s, ev) => AddIngredientBtn_Click(itemPanel); // Pass itemPanel as context
+                    itemPanel.Children.Add(addIngredientBtn);
                     // Create a sub-StackPanel for each Ingredient
                     foreach (var ingredient in item.IngredientList)
                     {
@@ -180,6 +192,14 @@ namespace sm_cbrc
                             Orientation = Orientation.Horizontal,
                             Margin = new Thickness(5)
                         };
+                        Button removeIngredientBtn = new Button
+                        {
+                            Content = "Remove Ingredient",
+                            Width = 100,
+                            Margin = new Thickness(0, 0, 5, 0)
+                        };
+                        removeIngredientBtn.Click += (s, ev) => itemPanel.Children.Remove(ingredientPanel); // Remove only this ingredientPanel
+                        ingredientPanel.Children.Add(removeIngredientBtn);
 
                         // Display ItemId of the ingredient
                         ingredientPanel.Children.Add(new TextBlock { Text = "ID:", Foreground = Brushes.LightGray, Width = 30 });
@@ -304,6 +324,104 @@ namespace sm_cbrc
         private void recipeAddBtn_Click(object sender, RoutedEventArgs e)
         {
             // Logic for adding a new recipe if needed
+        }
+
+        private void AddItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Create a new Item and its UI elements
+            StackPanel itemPanel = new StackPanel
+            {
+                Margin = new Thickness(10)
+            };
+            // Add "Remove Item" button at the top of each item panel
+            Button removeItemBtn = new Button
+            {
+                Content = "Remove Item",
+                Margin = new Thickness(0, 5, 0, 5)
+            };
+            removeItemBtn.Click += (s, ev) => recipeContainer.Children.Remove(itemPanel); // Remove the entire itemPanel
+            itemPanel.Children.Add(removeItemBtn);
+            // Add fields for Item ID, Quantity, and Craft Time
+            itemPanel.Children.Add(new TextBlock { Text = "Item ID:", Foreground = Brushes.LightGray });
+            itemPanel.Children.Add(new TextBox
+            {
+                Width = 200,
+                Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                Foreground = Brushes.White,
+                BorderBrush = Brushes.Gray
+            });
+
+            itemPanel.Children.Add(new TextBlock { Text = "Quantity:", Foreground = Brushes.LightGray });
+            itemPanel.Children.Add(new TextBox
+            {
+                Width = 200,
+                Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                Foreground = Brushes.White,
+                BorderBrush = Brushes.Gray
+            });
+
+            itemPanel.Children.Add(new TextBlock { Text = "Craft Time:", Foreground = Brushes.LightGray });
+            itemPanel.Children.Add(new TextBox
+            {
+                Width = 200,
+                Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                Foreground = Brushes.White,
+                BorderBrush = Brushes.Gray
+            });
+
+            // Add Ingredients section and "Add Ingredient" button
+            itemPanel.Children.Add(new TextBlock { Text = "Ingredients:", Foreground = Brushes.LightGray, Margin = new Thickness(0, 10, 0, 5) });
+            Button addIngredientBtn = new Button
+            {
+                Content = "Add Ingredient",
+                Margin = new Thickness(0, 5, 0, 5)
+            };
+            addIngredientBtn.Click += (s, ev) => AddIngredientBtn_Click(itemPanel); // Pass itemPanel as context
+            itemPanel.Children.Add(addIngredientBtn);
+
+            // Add the new itemPanel to the top of the recipeContainer
+            recipeContainer.Children.Insert(0, itemPanel);
+        }
+
+        // Adds a new ingredient panel to a specific item panel
+        private void AddIngredientBtn_Click(StackPanel itemPanel)
+        {
+            // Create the ingredient panel UI
+            StackPanel ingredientPanel = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(5)
+            };
+            Button removeIngredientBtn = new Button
+            {
+                Content = "Remove Ingredient",
+                Width = 100,
+                Margin = new Thickness(0, 0, 5, 0)
+            };
+            removeIngredientBtn.Click += (s, ev) => itemPanel.Children.Remove(ingredientPanel); // Remove only this ingredientPanel
+            ingredientPanel.Children.Add(removeIngredientBtn);
+
+            ingredientPanel.Children.Add(new TextBlock { Text = "ID:", Foreground = Brushes.LightGray, Width = 30 });
+            ingredientPanel.Children.Add(new TextBox
+            {
+                Width = 100,
+                Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                Foreground = Brushes.White,
+                BorderBrush = Brushes.Gray,
+                Margin = new Thickness(0, 0, 5, 0)
+            });
+
+            ingredientPanel.Children.Add(new TextBlock { Text = "Qty:", Foreground = Brushes.LightGray, Width = 30 });
+            ingredientPanel.Children.Add(new TextBox
+            {
+                Width = 100,
+                Background = new SolidColorBrush(Color.FromRgb(46, 50, 66)),
+                Foreground = Brushes.White,
+                BorderBrush = Brushes.Gray
+            });
+
+            // Add this ingredient panel to the item's ingredient section
+            itemPanel.Children.Add(ingredientPanel);
         }
     }
 }
