@@ -384,6 +384,7 @@ namespace sm_cbrc
         }
 
         // Adds a new ingredient panel to a specific item panel
+
         private void AddIngredientBtn_Click(StackPanel itemPanel)
         {
             // Create the ingredient panel UI
@@ -421,7 +422,7 @@ namespace sm_cbrc
             });
 
             // Add this ingredient panel to the item's ingredient section
-            itemPanel.Children.Add(ingredientPanel);
+            itemPanel.Children.Insert(9, ingredientPanel);
         }
     }
 }
