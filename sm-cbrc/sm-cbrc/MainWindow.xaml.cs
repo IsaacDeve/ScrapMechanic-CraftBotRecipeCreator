@@ -49,9 +49,8 @@ namespace sm_cbrc
 
     public partial class MainWindow : Window
     {
-        public string modsfolder = Directory.GetDirectories(System.IO.Path.Combine(Environment.GetFolderPath
-            (Environment.SpecialFolder.ApplicationData), "Axolot Games", "Scrap Mechanic", "User"))
-            .FirstOrDefault() + "\\Mods";
+        public string modsfolder = @"C:\Users";
+
 
         string selectedPath = "";
 
@@ -237,9 +236,8 @@ namespace sm_cbrc
                     {
                         IngredientList = new List<Ingredient>()  // Initialize IngredientList here
                     };
-                    Ingredient currentIngredient = null;  // Temporary ingredient variable to store each ingredient's data
 
-                    // Traverse through each child element in itemPanel
+                    // First, process main item fields (ItemId, Quantity, CraftTime)
                     foreach (var child in itemPanel.Children)
                     {
                         if (child is TextBox textBox)
@@ -256,18 +254,34 @@ namespace sm_cbrc
                                 case "Craft Time:":
                                     item.CraftTime = int.TryParse(textBox.Text, out var craftTime) ? craftTime : 0;
                                     break;
-                                case "ID:":
-                                    currentIngredient = new Ingredient { ItemId = textBox.Text };
-                                    item.IngredientList.Add(currentIngredient);  // Add ingredient to list
-                                    break;
-                                case "Qty:":
-                                    if (currentIngredient != null)
-                                    {
-                                        currentIngredient.Quantity = int.TryParse(textBox.Text, out var qty) ? qty : 0;
-                                    }
-                                    break;
                             }
                         }
+                    }
+
+                    // Next, process ingredients (assumes each ingredient has its own StackPanel)
+                    foreach (var child in itemPanel.Children.OfType<StackPanel>())
+                    {
+                        var ingredientPanel = child;
+                        var ingredient = new Ingredient();
+
+                        foreach (var ingredientChild in ingredientPanel.Children)
+                        {
+                            if (ingredientChild is TextBox textBox)
+                            {
+                                var labelText = ((TextBlock)ingredientPanel.Children[ingredientPanel.Children.IndexOf(textBox) - 1]).Text;
+                                switch (labelText)
+                                {
+                                    case "ID:":
+                                        ingredient.ItemId = textBox.Text;
+                                        break;
+                                    case "Qty:":
+                                        ingredient.Quantity = int.TryParse(textBox.Text, out var qty) ? qty : 0;
+                                        break;
+                                }
+                            }
+                        }
+
+                        item.IngredientList.Add(ingredient);
                     }
 
                     updatedItems.Add(item);
