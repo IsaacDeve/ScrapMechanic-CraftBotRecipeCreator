@@ -12,7 +12,7 @@ namespace sm_cbrc
 {
     class Adw_Item
     {
-        // hi im sigma
+        // hi im sigma //
         public string Id { get; set; }
         public string Name { get; set; }
         private Image imageControl;
