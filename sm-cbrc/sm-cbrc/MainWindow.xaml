@@ -1,0 +1,89 @@
+﻿<Window x:Class="sm_cbrc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:sm_cbrc"
+        mc:Ignorable="d"
+        Title="Recipe creator" Height="615" Width="1112">
+    <Grid Background="#2e3242">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="552*"/>
+            <RowDefinition Height="47*"/>
+        </Grid.RowDefinitions>
+        <!-- Меню -->
+        <Menu VerticalAlignment="Top" Background="#2e3242" Foreground="White">
+            <MenuItem Header="Recipe" Foreground="LightGray" Click="MenuItem_Click">
+                <MenuItem Click="OpenRecipe_Click" Header="Open" Foreground="LightGray" Background="#2e3242" BorderBrush="#2e3242" BorderThickness="0"/>
+                <MenuItem Click="SaveRecipe_Click" InputGestureText="Ctrl+S"
+                Header="Save" Foreground="LightGray" Background="#2e3242" BorderBrush="#2e3242" BorderThickness="0"/>
+            </MenuItem>
+            <MenuItem Header="Item..." Foreground="LightGray">
+                <MenuItem Header="List" Foreground="LightGray" Background="#2e3242" BorderThickness="0" Click="ItemList_Click" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Основная сетка с разделителем -->
+        <Grid Margin="0,41,0,0" Grid.RowSpan="2">
+            <!-- Отступ сверху для меню -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="554*" />
+                <ColumnDefinition Width="5" />
+                <!-- Ширина разделителя -->
+                <ColumnDefinition Width="296*" />
+                <ColumnDefinition Width="89*"/>
+                <ColumnDefinition Width="169*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Левая область с границей -->
+            <Border Grid.Column="0" BorderBrush="Transparent" BorderThickness="1" Margin="5,5,6,5" Background="#3a3f54">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0*" />
+                        <RowDefinition Height="451*"/>
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Верхняя часть -->
+                    <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="0,0,0,5" Grid.RowSpan="3">
+                        <StackPanel x:Name="recipeContainer" Margin="10"/>
+                    </ScrollViewer>
+
+
+
+                    <Button x:Name="saveBtn" Content="Save" Foreground="LightGray" BorderBrush="Transparent"
+    Background="#2e3242" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+    HorizontalAlignment="Left" VerticalAlignment="Top" 
+    Height="50" Width="76" FontSize="12" Click="saveBtn_Click" Grid.Row="3" Margin="105,5,0,0"/>
+
+                    <Button x:Name="addItemBtn" Content="Add New Item" Foreground="LightGray" BorderBrush="Transparent"
+    Background="#2e3242" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+    HorizontalAlignment="Left" VerticalAlignment="Top" 
+    Height="50" Width="90" FontSize="12" Click="AddItemBtn_Click" Grid.Row="3" Margin="10,5,0,0" />
+
+
+                    <!-- Разделитель -->
+                    <GridSplitter Grid.Row="2" Height="5" Background="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+
+
+                    <!-- Нижняя часть -->
+                </Grid>
+            </Border>
+
+            <!-- Разделитель -->
+            <GridSplitter Grid.Column="1" Width="5" Background="Gray" HorizontalAlignment="Stretch" />
+
+            <!-- Правая область с границей -->
+            <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="1" Margin="6,5,5,5" Background="#3a3f54" Grid.ColumnSpan="3">
+                <TextBox x:Name="recipecontentjson" IsReadOnly="True" Foreground="White" Background="#282C39" BorderBrush="Transparent" TextChanged="recipecontentjson_TextChanged"/>
+            </Border>
+            <Label Content="Read only" Foreground="Gray" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="4" Margin="0,-26,5,0"/>
+        </Grid>
+
+        <!-- Текстовое поле для пути к рецепту -->
+        <TextBox x:Name="recipepath" IsReadOnly="True" BorderBrush="Transparent" Text="aaa" Background="Transparent" Foreground="LightGray" 
+                 HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" 
+                 Margin="0,18,0,0" VerticalAlignment="Top" Width="586" TextChanged="recipepath_TextChanged"/>
+    </Grid>
+</Window>
