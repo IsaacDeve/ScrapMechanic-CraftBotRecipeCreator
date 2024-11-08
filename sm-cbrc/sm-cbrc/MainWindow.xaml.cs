@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -53,6 +54,15 @@ namespace sm_cbrc
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void Tutorial_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://isaacdeve.github.io/sm-cbrc.html",
+                UseShellExecute = true
+            });
         }
 
         private void NewRecipe_Click(object sender, RoutedEventArgs e)

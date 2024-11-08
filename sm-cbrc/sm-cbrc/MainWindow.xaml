@@ -21,6 +21,9 @@
             <MenuItem Header="Item..." Foreground="LightGray">
                 <MenuItem Header="List" Foreground="LightGray" Background="#2e3242" BorderThickness="0" Click="ItemList_Click" />
             </MenuItem>
+            <MenuItem Header="Help" Foreground="LightGray">
+                <MenuItem Header="Tutorial" Foreground="LightGray" Background="#2e3242" BorderThickness="0" Click="Tutorial_Click" />
+            </MenuItem>
         </Menu>
 
         <!-- Основная сетка с разделителем -->
