@@ -87,6 +87,6 @@
         <!-- Текстовое поле для пути к рецепту -->
         <TextBox x:Name="recipepath" IsReadOnly="True" BorderBrush="Transparent" Text="aaa" Background="Transparent" Foreground="LightGray" 
                  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" 
-                 Margin="0,18,0,0" VerticalAlignment="Top" Width="586" TextChanged="recipepath_TextChanged"/>
+                 Margin="0,18,0,0" VerticalAlignment="Top" Width="918" TextChanged="recipepath_TextChanged" Height="28"/>
     </Grid>
 </Window>

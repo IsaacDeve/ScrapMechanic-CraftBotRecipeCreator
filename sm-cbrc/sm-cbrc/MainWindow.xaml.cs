@@ -231,7 +231,7 @@ namespace sm_cbrc
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error reading file: {ex.Message}");
+                MessageBox.Show($"Error reading file: {ex.Message} ");
             }
         }
 
@@ -326,7 +326,7 @@ namespace sm_cbrc
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving file: {ex.Message}");
+                MessageBox.Show($"Error saving file: {ex.Message}\n Usually this error happens if there are comments in the file, \ndelete all comments and reopen the program");
             }
         }
 
